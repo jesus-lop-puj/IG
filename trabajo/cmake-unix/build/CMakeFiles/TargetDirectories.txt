@@ -1,0 +1,3 @@
+/home/propietario/Documentos/UGR/4º/IG/Material de prácticas-20200928/(b) Material de prácticas (zip, 23 MB)/materiales-ig/trabajo/cmake-unix/build/CMakeFiles/rebuild_cache.dir
+/home/propietario/Documentos/UGR/4º/IG/Material de prácticas-20200928/(b) Material de prácticas (zip, 23 MB)/materiales-ig/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir
+/home/propietario/Documentos/UGR/4º/IG/Material de prácticas-20200928/(b) Material de prácticas (zip, 23 MB)/materiales-ig/trabajo/cmake-unix/build/CMakeFiles/edit_cache.dir
