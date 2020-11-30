@@ -23,6 +23,7 @@
 #include "ig-aux.h"
 #include "matrices-tr.h"
 #include "grafo-escena.h"
+#include "malla-ind.h"
 
 using namespace std ;
 
@@ -235,4 +236,65 @@ bool NodoGrafoEscena::buscarObjeto
 
    // ni este nodo ni ningún hijo es el buscado: terminar
    return false ;
+}
+
+
+
+
+//EXAMEN-----------------------------------------------------
+GrafoEstrellaX::GrafoEstrellaX(unsigned n){
+  ponerNombre("GrafoEstrellaX");
+
+  agregar(new ConjuntoConos(n));
+
+  agregar(MAT_Rotacion(90,0,1,0));
+  agregar(MAT_Escalado(1.3,1.3,1));
+  agregar(MAT_Escalado(1.5,1.5,1));
+  agregar(MAT_Traslacion(-0.5,-0.5,0));
+  agregar(new ExtrellaZ(n));
+
+
+}
+
+
+unsigned GrafoEstrellaX::leerNumParametros() const{
+  return 1;
+}
+
+ConjuntoConos::ConjuntoConos(unsigned n){
+  float y,z,w; //Angulo y coordenadas
+  float radio=1.3;
+
+  agregar(MAT_Escalado(0.14,0.15,0.14));
+  for(unsigned i=0; i<2*n+1; i++){
+    w=2*M_PI/n *i;
+    if(i%2==0){
+      y=0.5+radio*cos(w);
+      z=0.5+radio*sin(w);
+
+      agregar(new ConoPosicion(30,y,z));
+    }
+
+  }
+
+}
+
+
+ConoPosicion::ConoPosicion(int tam, float y, float z){
+
+      agregar(MAT_Traslacion(0,y,z));
+      agregar(new Cono(tam,tam));
+
+
+}
+// --------------------------------------------------------------------------
+//Redefinimos la función actualizarEstadoParametro
+void GrafoEstrellaX::actualizarEstadoParametro(const unsigned iParam, const float t_sec){
+  assert(iParam<leerNumParametros());
+
+  switch(iParam){
+    case 0:
+      //fijarRotacion(1.0 * sin(0.5*M_PI*t_sec));
+      break;
+  }
 }

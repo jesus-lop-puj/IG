@@ -30,6 +30,8 @@
 #include "matrices-tr.h"
 #include "objeto3d.h"
 #include "materiales-luces.h"
+#include "malla-ind.h"
+#include "malla-revol.h"
 
 // *********************************************************************
 // declaración adelantada de estructura para un nodo del grafo de escena
@@ -100,6 +102,30 @@ class NodoGrafoEscena : public Objeto3D
 
 
 } ;
+
+class GrafoEstrellaX : public NodoGrafoEscena{
+   protected:
+    Matriz4f * rotacionCabeza = nullptr;
+
+    void actualizarEstadoParametro(const unsigned iParam, const float t_sec);
+
+  public:
+  GrafoEstrellaX(unsigned n);
+  unsigned leerNumParametros() const;
+  void fijarRotacionCabeza(const float nuevaRotacion); //Fijamos la rotacion
+  void ponerConos(unsigned n);
+};
+
+class ConjuntoConos:public NodoGrafoEscena{
+public:
+  ConjuntoConos(unsigned n);
+};
+
+class ConoPosicion:public NodoGrafoEscena{ //Coloca cada cono en su posicion
+public:
+  ConoPosicion(int tam, float y, float z);
+};
+
 
 #endif // GRAFO_ESCENA_HPP
 

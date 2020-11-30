@@ -259,3 +259,73 @@ CuboColores::CuboColores()
              { +1.0, +1.0, +1.0 }, // 7
         };
 }
+
+
+
+//EXAMEN-------------------------------------------
+ExtrellaZ::ExtrellaZ(unsigned n)
+:  MallaInd( "ExtrellaZ" ){
+  vertices.push_back({+0.5,+0.5,0}); //Añadimos el centro
+  col_ver.push_back({+1,+1,+1}); //Añadimos el color
+
+  float x,y,w; //Angulo y coordenadas
+  float radio=0.5;
+
+  for(unsigned i=0; i<2*n+1; i++){
+    w=2*M_PI/n *i;
+    if(i%2==0){
+      x=0.5+radio*cos(w);
+      y=0.5+radio*sin(w);
+    }
+    else{
+      x=0.5+radio*cos(w)/2;
+      y=0.5+radio*sin(w)/2;
+    }
+
+
+    vertices.push_back({x,y,0.0});
+    col_ver.push_back({x,y,0.0});
+
+  }
+
+  for(unsigned i=0; i<2*n; i++){
+    triangulos.push_back({0,i+1,i+2});
+  }
+}
+
+
+
+PiramideExtrellaZ::PiramideExtrellaZ(unsigned n)
+:  MallaInd( "PiramideExtrellaZ" ){
+
+  vertices.push_back({+0.5,+0.5,0}); //Añadimos el centro
+  col_ver.push_back({+1,+1,+1}); //Añadimos el color
+
+  float x,y,w; //Angulo y coordenadas
+  float radio=0.5;
+
+  for(unsigned i=0; i<2*n+1; i++){
+    w=2*M_PI/n *i;
+    if(i%2==0){
+      x=0.5+radio*cos(w);
+      y=0.5+radio*sin(w);
+    }
+    else{
+      x=0.5+radio*cos(w)/2;
+      y=0.5+radio*sin(w)/2;
+    }
+
+
+    vertices.push_back({x,y,0.0});
+    col_ver.push_back({x,y,0.0});
+
+  }
+
+  vertices.push_back({0.5,0.5,0.5});
+  col_ver.push_back({+1,+1,+1}); //Añadimos el color
+
+
+  for(unsigned i=0; i<2*n; i++){
+    triangulos.push_back({2*n+2,i,i+1});
+  }
+}

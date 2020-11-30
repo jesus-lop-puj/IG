@@ -111,5 +111,20 @@ class Cubo24 : public MallaInd
 } ;
 
 
+// EXAMEN --------------------------------------------------------------------
+
+class ExtrellaZ : public MallaInd
+{
+  public:
+      ExtrellaZ(unsigned n);
+} ;
+
+
+class PiramideExtrellaZ : public MallaInd
+{
+  public:
+      PiramideExtrellaZ(unsigned n);
+} ;
+
 
 #endif

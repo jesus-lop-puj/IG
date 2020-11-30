@@ -165,6 +165,8 @@ Escena1::Escena1()
    using namespace std ;
    cout << "Creando objetos de escena 1 .... " << flush ;
 
+   objetos.push_back(new ExtrellaZ(9));
+
    // añadir el objeto 'Cubo' a la lista de objetos de esta escena:
    objetos.push_back( new Cubo() );
 
@@ -188,6 +190,8 @@ Escena2::Escena2()
    using namespace std ;
    cout << "Creando objetos de escena 2 .... " << flush ;
 
+   objetos.push_back(new PiramideExtrellaZ(9));
+
    //objetos.push_back( new MallaPLY("../recursos/plys/beethoven.ply"));
    objetos.push_back( new MallaRevolPLY("../recursos/plys/peon.ply", 50));
    objetos.push_back(new Cilindro(10,30));
@@ -207,6 +211,8 @@ Escena3::Escena3()
 {
    using namespace std ;
    cout << "Creando objetos de escena 3 .... " << flush ;
+
+   objetos.push_back(new GrafoEstrellaX(9));
 
    objetos.push_back(new C());
 
