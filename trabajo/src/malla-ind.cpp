@@ -50,6 +50,23 @@ void MallaInd::calcularNormalesTriangulos()
 
    // COMPLETAR: Práctica 4: creación de la tabla de normales de triángulos
    // ....
+   Tupla3f p,q,r;
+   Tupla3f a,b,n_c;
+   for(unsigned int i=0; i<triangulos.size(); i++){
+     p=vertices[triangulos[i](0)];
+     q = vertices[triangulos[i](1)];
+     r = vertices[triangulos[i](2)];
+
+     a=q-p;
+     b=r-p;
+     n_c=a.cross(b);
+
+     if(n_c.lengthSq()>0)
+      nor_tri.push_back(n_c.normalized());
+     else
+      nor_tri.push_back({0,0,0});
+
+   }
 
 }
 
@@ -62,7 +79,19 @@ void MallaInd::calcularNormales()
    // COMPLETAR: en la práctica 4: calculo de las normales de la malla
    // se debe invocar en primer lugar 'calcularNormalesTriangulos'
    // .......
+   calcularNormalesTriangulos();
 
+   nor_ver.insert(nor_ver.begin(), vertices.size(), {0.0,0.0,0.0});
+   for(unsigned int i=0; i<triangulos.size(); i++){
+     nor_ver[triangulos[i](0)]=nor_ver[triangulos[i](0)]+nor_tri[i];
+     nor_ver[triangulos[i](1)]=nor_ver[triangulos[i](1)]+nor_tri[i];
+     nor_ver[triangulos[i](2)]=nor_ver[triangulos[i](2)]+nor_tri[i];
+   }
+
+   for(unsigned int i=0; i<vertices.size(); i++){
+     if(nor_ver[i].lengthSq()>0)
+      nor_ver[i]=nor_ver[i].normalized();
+   }
 
 }
 
@@ -147,7 +176,7 @@ MallaPLY::MallaPLY( const std::string & nombre_arch )
 
    // COMPLETAR: práctica 4: invocar  a 'calcularNormales' para el cálculo de normales
    // .................
-
+   calcularNormales();
 
 
 }
@@ -183,6 +212,7 @@ Cubo::Cubo()
          {1,5,7}, {1,7,3}  // Z+ (+1)
       } ;
 
+      calcularNormales();
 }
 // -----------------------------------------------------------------------------------------------
 
@@ -215,6 +245,8 @@ Tetraedro::Tetraedro()
         { +0.0, +1.0, +1.0},
         { +0.0, +1.0, +1.0},
       };
+
+      calcularNormales();
 }
 // -----------------------------------------------------------------------------------------------
 // ****************************************************************************

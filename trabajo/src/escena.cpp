@@ -12,7 +12,7 @@
 #include "materiales-luces.h"
 #include "seleccion.h"
 #include "modelo-jer.h"
-
+#include "latapeones.h"
 
 
 
@@ -22,7 +22,8 @@ Escena::Escena()
 {
    // COMPLETAR: Práctica 4: inicializar 'col_fuentes' y 'material_ini'
    // ...
-
+   col_fuentes = new Col2Fuentes();
+   material_ini = new Material(0.5,1,1,150);
 
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')
@@ -82,6 +83,12 @@ void Escena::visualizarGL( ContextoVis & cv )
       // * activar la colección de fuentes de la escena
       // * activar el material inicial
       // ....
+      cauce->fijarEvalMIL(true);
+      col_fuentes->activar(*cauce);
+      if(material_ini!=nullptr){
+        cv.material_act=material_ini;
+        material_ini->activar(*cauce);
+      }
 
    }
    else // si la iluminación no está activada, deshabilitar MIL y texturas
@@ -95,7 +102,6 @@ void Escena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: Práctica 1: visualizar el objeto actual ('objeto')
 
    objeto->visualizarGL(cv);
-
 
 
    // si hay un FBO, dibujarlo (opcional...)
@@ -219,7 +225,15 @@ Escena3::Escena3()
 // Añadir la implementación del constructor de la clase Escena4 para construir
 // los objetos que se indican en los guiones de las práctica 4
 // .......
+Escena4::Escena4()
+{
+  using namespace std ;
+  cout << "Creando objetos de escena 3 .... " << flush ;
 
+  objetos.push_back(new LataPeones());
+
+  cout << "hecho." << endl << flush ;
+}
 
 
 // ----------------------------------------------------------------------

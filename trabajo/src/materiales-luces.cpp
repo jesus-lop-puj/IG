@@ -37,6 +37,7 @@ Textura::Textura( const std::string & nombreArchivoJPG )
    // (las variables de instancia están inicializadas en la decl. de la clase)
    // .....
 
+   imagen = LeerArchivoJPEG(nombreArchivoJPG.c_str(), ancho, alto);
 }
 
 // ---------------------------------------------------------------------
@@ -48,6 +49,21 @@ void Textura::enviar()
    // COMPLETAR: práctica 4: enviar la imagen de textura a la GPU
    // y configurar parámetros de la textura (glTexParameter)
    // .......
+   glGenTextures(1, &ident_textura);  //Generamos identificador
+   glActiveTexture(GL_TEXTURE0);  //Activamos identificador
+   glBindTexture(GL_TEXTURE_2D, ident_textura); //Activamos textura con el identificador indicado
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //Parametros de textura
+
+   //Enviamos a la GPU
+   gluBuild2DMipmaps(GL_TEXTURE_2D,
+                     GL_RGB,                //Formato interno
+                     ancho,                 //Nº de columnas
+                     alto,                  //Nº de filas
+                     GL_RGB,                //formato y orden de los texels en RAM
+                     GL_UNSIGNED_BYTE,      //tipo de cada componente de cada texel
+                     imagen                 //Puntero a ls bytes con texels
+                   );
 
 }
 
@@ -71,6 +87,12 @@ void Textura::activar( Cauce & cauce  )
 {
    // COMPLETAR: práctica 4: enviar la textura a la GPU (solo la primera vez) y activarla
    // .......
+   if(!enviada){
+     enviar();
+     enviada = true;
+   }
+   cauce.fijarEvalText(true, ident_textura);
+   cauce.fijarTipoGCT(modo_gen_ct, coefs_s, coefs_t);
 
 }
 // *********************************************************************
@@ -125,6 +147,12 @@ void Material::activar( Cauce & cauce )
 {
    // COMPLETAR: práctica 4: activar un material
    // .....
+   if(textura != nullptr)
+    textura->activar(cauce);
+   else
+    cauce.fijarEvalText(false);
+
+  cauce.fijarParamsMIL({k_amb,k_amb,k_amb}, {k_dif,k_dif,k_dif}, {k_pse,k_pse,k_pse}, exp_pse);
 
 }
 //**********************************************************************
@@ -193,6 +221,20 @@ void ColFuentesLuz::activar( Cauce & cauce )
    //   (crear un array con los colores y otro con las posiciones/direcciones,
    //    usar el cauce para activarlas)
    // .....
+   vector<Tupla3f> colores;
+   vector<Tupla4f> pos_dir;
+
+   for(unsigned int i=0; i<vpf.size(); i++){
+     colores.push_back(vpf[i]->color);
+     Tupla4f ejeZ = {0.0,0.0,1.0,0.0};
+
+     ejeZ=MAT_Rotacion(vpf[i]->longi, 0.0, 1.0, 0.0) * ejeZ;
+     ejeZ=MAT_Rotacion(vpf[i]->longi, -1.0, 0.0, 0.0) * ejeZ;
+
+     pos_dir.push_back(ejeZ);
+   }
+
+   cauce.fijarFuentesLuz(colores,pos_dir);
 
 }
 

@@ -87,6 +87,9 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    //Guardamos modelview actual
    cv.cauce_act->pushMM();
 
+   //Guardamos material activo
+   Material * material_previo = cv.iluminacion ? cv.material_act : nullptr;
+
    //Guardamos el color previamente fijado
    const Tupla4f color_previo = leerFijarColVertsCauce( cv );
 
@@ -101,6 +104,13 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
         cv.cauce_act->compMM(*(entradas[i].matriz)); //Componemos matriz
         break;
 
+      case TipoEntNGE::material :
+        if(cv.iluminacion && !cv.modo_seleccion){
+          cv.material_act = entradas[i].material;
+          cv.material_act->activar(*cv.cauce_act);
+        }
+        break;
+
       default:
         cout << "Error" << endl;
         exit(-1);
@@ -111,8 +121,6 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    //Restauramos el color previamente fijado
    glColor4fv( color_previo );
 
-   //Restauramos modelview guardada
-   cv.cauce_act->popMM();
 
    // COMPLETAR: práctica 4: en la práctica 4, si 'cv.iluminacion' es 'true',
    // se deben de gestionar los materiales:
@@ -120,7 +128,14 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    //   2. si una entrada des de tipo material, activarlo y actualizar 'cv.material_act'
    //   3. al finalizar, restaurar el material activo al inicio (si es distinto del actual)
 
+   if(material_previo != nullptr){
+     cv.material_act = material_previo;
+     cv.material_act->activar(*cv.cauce_act);
+   }
 
+
+   //Restauramos modelview guardada
+   cv.cauce_act->popMM();
 
 }
 
