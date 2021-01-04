@@ -12,6 +12,7 @@
 #include "tuplasg.h"
 #include "malla-ind.h"   // declaración de 'ContextoVis'
 #include "lector-ply.h"
+#include "seleccion.h"
 
 
 // *****************************************************************************
@@ -124,15 +125,27 @@ void MallaInd::visualizarGL( ContextoVis & cv )
      array_verts = new ArrayVertices(GL_FLOAT, 3, vertices.size(), vertices.data());
      array_verts->fijarIndices(GL_UNSIGNED_INT, 3*triangulos.size(), triangulos.data());
    }
-   if(!col_ver.empty()){
-     array_verts->fijarColores(GL_FLOAT, 3, col_ver.data());
+
+   if(cv.modo_seleccion){
+     //Leemos el identificador del objeto
+     int ident = leerIdentificador();
+
+     //Fijamos el color del cauce
+     if(ident != -1)
+      FijarColVertsIdent(*cv.cauce_act, ident);
    }
-   if(!cc_tt_ver.empty()){
-     array_verts->fijarCoordText(GL_FLOAT, 2, cc_tt_ver.data());
+   else{
+     if(!col_ver.empty()){
+       array_verts->fijarColores(GL_FLOAT, 3, col_ver.data());
+     }
+     if(!cc_tt_ver.empty()){
+       array_verts->fijarCoordText(GL_FLOAT, 2, cc_tt_ver.data());
+     }
+     if(!nor_ver.empty()){
+       array_verts->fijarNormales(GL_FLOAT, nor_ver.data());
+     }
    }
-   if(!nor_ver.empty()){
-     array_verts->fijarNormales(GL_FLOAT, nor_ver.data());
-   }
+
 
 
    // COMPLETAR: práctica 1: visualizar según el modo (en 'cv.modo_envio')
@@ -153,6 +166,7 @@ void MallaInd::visualizarGL( ContextoVis & cv )
 
    // restaurar el color previamente fijado
    glColor4fv( color_previo );
+
 }
 
 
@@ -290,4 +304,75 @@ CuboColores::CuboColores()
              { +1.0, +1.0, -1.0 }, // 6
              { +1.0, +1.0, +1.0 }, // 7
         };
+
+        calcularNormales();
+}
+
+
+
+// -----------------------------------------------------------------------------------------------
+// ****************************************************************************
+// Clase Cubo24
+
+Cubo24::Cubo24(){
+  vertices = {
+     {-1.0,-1.0,-1.0}, {-1.0,-1.0,1.0},
+     {1.0,-1.0,-1.0}, {1.0,-1.0,1.0},
+
+     {-1.0,1.0,-1.0}, {-1.0,1.0,1.0},
+     {1.0,1.0,-1.0}, {1.0,1.0,1.0},
+
+     {-1.0,1.0,1.0},{1.0,1.0,1.0},
+     {-1.0,-1.0,1.0},{1.0,-1.0,1.0},
+
+     {-1.0,1.0,-1.0},{1.0,1.0,-1.0},
+     {-1.0,-1.0,-1.0},{1.0,-1.0,-1.0},
+
+     {-1.0,1.0,-1.0},{-1.0,1.0,1.0},
+     {-1.0,-1.0,-1.0},{-1.0,-1.0,1.0},
+
+     {1.0,1.0,-1.0},{1.0,1.0,1.0},
+     {1.0,-1.0,-1.0},{1.0,-1.0,1.0}
+  };
+
+  triangulos = {
+     {0,2,1},{3,1,2},
+     {4,5,6},{7,6,5},
+     {9,8,10},{9,10,11},
+     {13,14,12},{13,15,14},
+     {17,16,18},{17,18,19},
+     {21,20,22},{21,23,22}
+
+  };
+
+  cc_tt_ver = {
+     {0.0, 1.0},{0.0, 0.0},
+     {1.0,1.0},{1.0,0.0},
+     {0.0, 0.0},{0.0, 1.0},
+     {1.0,0.0},{1.0,1.0},
+     {0.0,0.0},{1.0,0.0},
+     {0.0,1.0},{1.0,1.0},
+     {1.0,0.0},{0.0,0.0},
+     {1.0,1.0},{0.0,1.0},
+     {0.0,0.0},{1.0,0.0},
+     {0.0,1.0},{1.0,1.0},
+     {1.0,0.0},{0.0,0.0},
+     {1.0,1.0},{0.0,1.0},
+  };
+
+  calcularNormales();
+}
+
+
+// -----------------------------------------------------------------------------------------------
+// ****************************************************************************
+// Clase NodoCubo24
+
+NodoCubo24::NodoCubo24(){
+  Textura * textura = new Textura("../recursos/imgs/window-icon.jpg");
+   agregar( new Material(textura, 1, 0.5, 1, 70) );
+
+   agregar(new Cubo24());
+
+   ponerNombre("Nodo de cubo con 24 vertices");
 }

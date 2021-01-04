@@ -23,11 +23,14 @@ Escena::Escena()
    // COMPLETAR: Práctica 4: inicializar 'col_fuentes' y 'material_ini'
    // ...
    col_fuentes = new Col2Fuentes();
-   material_ini = new Material(0.5,1,1,150);
+   material_ini = new Material(0.5,0.5,0.5,150);
 
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')
-   camaras.push_back( new CamaraOrbitalSimple() );
+   //camaras.push_back( new CamaraOrbitalSimple() );
+   camaras.push_back(new Camara3Modos(false, {0.0,0.0,5.0}, 1.0, {0.0,0.0,0.0},90.0));
+   camaras.push_back(new Camara3Modos(true, {5.0,0.0,0.0}, 1.0, {0.0,0.0,0.0},90.0));
+   camaras.push_back(new Camara3Modos(true, {0.01,5.0,0.0}, 1.0, {0.0,0.0,0.0},90.0));
 
 }
 // -----------------------------------------------------------------------------------------------
@@ -198,7 +201,7 @@ Escena2::Escena2()
    objetos.push_back( new MallaRevolPLY("../recursos/plys/peon.ply", 50));
    objetos.push_back(new Cilindro(10,30));
    objetos.push_back(new Cono(10,30));
-   objetos.push_back(new Esfera(10,30));
+   objetos.push_back(new Esfera(40,30));
 
    cout << "hecho." << endl << flush ;
 }
@@ -228,9 +231,10 @@ Escena3::Escena3()
 Escena4::Escena4()
 {
   using namespace std ;
-  cout << "Creando objetos de escena 3 .... " << flush ;
+  cout << "Creando objetos de escena 4 .... " << flush ;
 
   objetos.push_back(new LataPeones());
+  objetos.push_back(new NodoCubo24());
 
   cout << "hecho." << endl << flush ;
 }
@@ -241,3 +245,12 @@ Escena4::Escena4()
 // Añadir la implementación del constructor de la clase Escena5 para construir
 // los objetos que se indican en los guiones de las práctica 5
 // .......
+Escena5::Escena5()
+{
+  using namespace std ;
+  cout << "Creando objetos de escena 5 .... " << flush ;
+
+  objetos.push_back(new VariasLatasPeones());
+
+  cout << "hecho." << endl << flush ;
+}

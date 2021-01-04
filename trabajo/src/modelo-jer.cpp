@@ -70,6 +70,8 @@ void C :: fijarMovBrazoI(const float nuevaRotacion){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase Cuerpo
 Cuerpo :: Cuerpo(){
+  agregar(new Material( 0.9, 0.8, 0.29, 0.88));
+
   agregar( MAT_Escalado(0.75,2.0,0.75) );
   agregar ( MAT_Rotacion(180.0, 0.0, 0.0, 1.0));
   agregar(new mediaEsfera(30,30));
@@ -79,6 +81,10 @@ Cuerpo :: Cuerpo(){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase BrazoDer
 BrazoDer :: BrazoDer(Matriz4f * &movBrazoDer){
+  Textura * textura = new Textura("./imgs/metal.jpg");
+
+  agregar(new Material(textura, 0.9, 0.9, 1, 150));
+
   unsigned ind = agregar(MAT_Rotacion(0.0,1.0,0.0,0.0));
 
   agregar( MAT_Traslacion(0.80, -0.9, 0.0));
@@ -96,6 +102,10 @@ BrazoDer :: BrazoDer(Matriz4f * &movBrazoDer){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase BrazoIzq
 BrazoIzq :: BrazoIzq(Matriz4f * &movBrazoIzq){
+  Textura * textura = new Textura("./imgs/metal.jpg");
+
+  agregar(new Material(textura, 0.9, 0.9, 1, 150));
+
   unsigned ind = agregar(MAT_Rotacion(0.0,1.0,0.0,0.0));
 
   agregar( MAT_Traslacion(-0.80, -0.9, 0.0));
@@ -112,6 +122,7 @@ BrazoIzq :: BrazoIzq(Matriz4f * &movBrazoIzq){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase mediaCabezaA
 mediaCabezaA :: mediaCabezaA(){
+
   agregar( MAT_Traslacion(0.0, 0.5, 0.0));
   agregar( MAT_Escalado(0.75,0.75,0.75) );
   agregar(new mediaEsfera(30,30));
@@ -127,6 +138,7 @@ mediaCabezaA :: mediaCabezaA(){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase mediaCabezaB
 mediaCabezaB :: mediaCabezaB(){
+
   agregar( MAT_Traslacion(0.0, 0.5, 0.0));
   agregar ( MAT_Rotacion(180.0, 0.0, 0.0, 1.0));
   agregar( MAT_Escalado(0.75,0.40,0.75) );
@@ -143,6 +155,7 @@ mediaCabezaB :: mediaCabezaB(){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase Ojos
 Ojos :: Ojos(){
+
   agregar( MAT_Traslacion(0.0, 0.5, 0.69));
   agregar( MAT_Escalado(0.15,0.15,0.15) );
   agregar( MAT_Traslacion(-1.25, 0.0, 0.0));
@@ -177,7 +190,9 @@ Cabeza :: Cabeza(Matriz4f * &rotacionCabeza){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase Eva
 Eva::Eva(Matriz4f * &traslacion, Matriz4f * &rotacionCabeza, Matriz4f * &movBrazoIzq, Matriz4f * &movBrazoDer){
+  agregar(new Material(0.9, 0.8, 0.2, 150));
   unsigned ind = agregar( MAT_Traslacion(0.0, 0.0, 0.0) );
+
   agregar(new Cuerpo());
   agregar(new BrazoDer(movBrazoDer));
   agregar(new BrazoIzq(movBrazoIzq));

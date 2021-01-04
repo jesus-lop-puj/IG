@@ -474,9 +474,10 @@ void Inicializar( int argc, char *argv[] )
    // hacer 'push_back' en el vector de escenas de instancias de 'Escena2',
    // 'Escena3', etc..
    // ......
-   escenas.push_back( new Escena2() );
+   escenas.push_back(new Escena2() );
    escenas.push_back(new Escena3() );
    escenas.push_back(new Escena4() );
+   escenas.push_back(new Escena5() );
 
 }
 
