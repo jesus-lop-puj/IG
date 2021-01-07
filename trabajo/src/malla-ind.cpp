@@ -34,6 +34,31 @@ MallaInd::MallaInd( const std::string & nombreIni )
    ponerNombre(nombreIni) ;
 }
 
+// -----------------------------------------------------------------------------
+
+void MallaInd::visualizarNormales()
+{
+   using namespace std ;
+
+   if ( nor_ver.size() == 0 )
+   {
+      cout << "Advertencia: intentando dibujar normales de una malla que no tiene tabla (" << leerNombre() << ")." << endl ;
+      return ;
+   }
+   if ( array_verts_normales == nullptr )
+   {
+      for( unsigned i = 0 ; i < vertices.size() ; i++ )
+      {
+         segmentos_normales.push_back( vertices[i] );
+         segmentos_normales.push_back( vertices[i]+ 0.35f*(nor_ver[i]) );
+      }
+      array_verts_normales = new ArrayVertices( GL_FLOAT, 3, segmentos_normales.size(), segmentos_normales.data() );
+   }
+
+   array_verts_normales->visualizarGL_MI_DAE( GL_LINES );
+   CError();
+}
+
 //-----------------------------------------------------------------------------
 // calcula la tabla de normales de triángulos una sola vez, si no estaba calculada
 
@@ -115,6 +140,12 @@ void MallaInd::visualizarGL( ContextoVis & cv )
 
    // guardar el color previamente fijado
    const Tupla4f color_previo = leerFijarColVertsCauce( cv );
+
+   //Visualizamos normales si procede
+   if(cv.visualizando_normales){
+     visualizarNormales();
+     return;
+   }
 
    // COMPLETAR: práctica 1: si el puntero 'array_verts' es nulo, crear el objeto ArrayVerts
    //   * en el constructor se dan los datos de la tabla de coordenadas de vértices (tabla 'vertices')
