@@ -402,7 +402,7 @@ void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
    const int nv = (indices != nullptr)? indices->num_tuplas_ind : num_vertices;
    glBegin( tipo_primitiva );
 
-   for(GLint i=0; i<nv; i++){     //Recorremos los vértices
+   for(GLuint i=0; i<nv; i++){     //Recorremos los vértices
      //Recuperamos el índice del vertice en la tabla de coordenadas (iv)
      const GLuint iv = (indices != nullptr) ? ((const GLuint *) indices->datos)[i] : i;
 

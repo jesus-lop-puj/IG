@@ -336,6 +336,8 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          org_cartesianas = cart_nuevas;
          org_polares = Esfericas(org_cartesianas);
 
+         actualizarEjesMCV();
+
          break ;
       }
       case ModoCam::prim_pers_despl :

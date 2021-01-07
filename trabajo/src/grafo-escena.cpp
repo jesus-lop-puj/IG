@@ -24,6 +24,8 @@
 #include "matrices-tr.h"
 #include "grafo-escena.h"
 
+#include "seleccion.h"
+
 using namespace std ;
 
 // *********************************************************************
@@ -97,6 +99,13 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    for(unsigned i=0; i<entradas.size(); i++){
      switch(entradas[i].tipo){
       case TipoEntNGE::objeto :                //Si la entrada es un objeto
+        if(cv.modo_seleccion){
+          int ident = leerIdentificador();
+          if(ident!=-1)
+            FijarColVertsIdent(*cv.cauce_act, ident);
+        }else if (tieneColor()){
+          glColor4fv(leerColor());
+        }
         entradas[i].objeto->visualizarGL(cv);   //Visualizamos el objeto
         break;
 
@@ -283,5 +292,5 @@ bool NodoGrafoEscena::buscarObjeto
    }
 
    // ni este nodo ni ningún hijo es el buscado: terminar
-   return false ;
+   return encontrado;
 }

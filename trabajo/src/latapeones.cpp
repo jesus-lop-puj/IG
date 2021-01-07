@@ -11,6 +11,7 @@ LataPeones :: LataPeones(){
   agregar(new PeonBlanco());
   agregar(new PeonMadera());
 
+  ponerIdentificador(0);
   ponerNombre("Lata y peones");
 }
 
@@ -72,6 +73,7 @@ TapaSuperiorLata :: TapaSuperiorLata(){
   agregar(new MallaRevolPLY("../recursos/plys/lata-psup.ply",70));
 
   ponerNombre("Tapa Superior Lata");
+  ponerIdentificador(-1);
 }
 
 
@@ -81,6 +83,7 @@ TapaInferiorLata :: TapaInferiorLata(){
   agregar(new MallaRevolPLY("../recursos/plys/lata-pinf.ply",70));
 
   ponerNombre("Tapa Superior Lata");
+  ponerIdentificador(-1);
 }
 
 
@@ -91,6 +94,7 @@ CuerpoLata :: CuerpoLata(std::string nombre){
   agregar(new MallaRevolPLY("../recursos/plys/lata-pcue.ply",100));
 
   ponerNombre("Cuerpo Lata");
+  ponerIdentificador(-1);
 }
 
 //Práctica 5
@@ -105,6 +109,7 @@ VariasLatasPeones :: VariasLatasPeones(){
   agregar(new PeonBlanco());
   agregar(new PeonMadera());
 
+  ponerIdentificador(0);
   ponerNombre("Varias latas y peones");
 }
 
