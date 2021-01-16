@@ -157,15 +157,7 @@ void MallaInd::visualizarGL( ContextoVis & cv )
      array_verts->fijarIndices(GL_UNSIGNED_INT, 3*triangulos.size(), triangulos.data());
    }
 
-   if(cv.modo_seleccion){
-     //Leemos el identificador del objeto
-     int ident = leerIdentificador();
 
-     //Fijamos el color del cauce
-     if(ident != -1)
-      FijarColVertsIdent(*cv.cauce_act, ident);
-   }
-   else{
      if(!col_ver.empty()){
        array_verts->fijarColores(GL_FLOAT, 3, col_ver.data());
      }
@@ -175,7 +167,7 @@ void MallaInd::visualizarGL( ContextoVis & cv )
      if(!nor_ver.empty()){
        array_verts->fijarNormales(GL_FLOAT, nor_ver.data());
      }
-   }
+  
 
 
 
