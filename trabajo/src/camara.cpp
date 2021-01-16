@@ -370,7 +370,7 @@ void Camara3Modos::moverZ( const float dz )
          // actualizar las coordenadas cartesianas a partir de las polares
          // nota: los ejes no cambian, ni el punto de atención
          // .....
-         float rmin = 0.5, epsilon = 0.1;
+         float rmin = 0.4, epsilon = 0.1;
          float r = rmin + (org_polares(2)-rmin)*(pow(1.0+epsilon, dz));
          org_polares = {org_polares(0), org_polares(1), r};
          org_cartesianas = Cartesianas(org_polares);
@@ -385,7 +385,7 @@ void Camara3Modos::moverZ( const float dz )
          // nota: los ejes no cambian
          // .....
          punto_atencion = punto_atencion + dz*eje[2];
-
+         //punto_atencion = punto_atencion + Tupla3f({0.0,0.0,dz});
          break ;
       }
    }

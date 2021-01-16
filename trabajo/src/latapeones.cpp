@@ -20,7 +20,7 @@ PeonMadera :: PeonMadera(){
 
   agregar(MAT_Traslacion(1,0.4,0));
   agregar(MAT_Escalado(0.3,0.3,0.3));
-  agregar(new Material(textura, 0.5, 1, 1, 30));
+  agregar(new Material(textura, 0.5, 0.5, 0.5, 30));
   agregar(new MallaRevolPLY("../recursos/plys/peon.ply",70));
 
   ponerIdentificador(1);
@@ -46,7 +46,7 @@ PeonNegro :: PeonNegro(){
 
   agregar(MAT_Traslacion(0,0.4,0));
   agregar(MAT_Escalado(0.3,0.3,0.3));
-  agregar(new Material(0.5, 0.1, 1, 30));
+  agregar(new Material(0.2, 0.1, 0.7, 30));
   agregar(new MallaRevolPLY("../recursos/plys/peon.ply",70));
 
   ponerIdentificador(3);

@@ -28,7 +28,7 @@ Escena::Escena()
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')
    //camaras.push_back( new CamaraOrbitalSimple() );
-   camaras.push_back(new Camara3Modos(false, {0.0,0.0,5.0}, 1.0, {0.0,0.0,0.0},90.0));
+   camaras.push_back(new Camara3Modos(true, {0.0,0.0,5.0}, 1.0, {0.0,0.0,0.0},90.0));
    camaras.push_back(new Camara3Modos(true, {5.0,0.0,0.0}, 1.0, {0.0,0.0,0.0},90.0));
    camaras.push_back(new Camara3Modos(true, {0.01,5.0,0.0}, 1.0, {0.0,0.0,0.0},90.0));
 
