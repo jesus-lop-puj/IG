@@ -325,18 +325,13 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // 4. actualizar las coordenadas cartesianas
          // 5. actualizar los ejes del MCV (actualizarEjesMCV)
          // .....
-         Tupla3f cart_nuevas;
-         Matriz4f Rot = MAT_Rotacion(db,eje[0]) * MAT_Rotacion(-da, {0.0,-1.0,0.0});
-         eje[0] = Rot * eje[0];
-         eje[1] = Rot * eje[1];
-         eje[2] = Rot * eje[2];
-
-         cart_nuevas = Rot * org_cartesianas;
-         punto_atencion = punto_atencion + (org_cartesianas - cart_nuevas);
-         org_cartesianas = cart_nuevas;
-         org_polares = Esfericas(org_cartesianas);
+         org_polares = org_polares + Tupla3f({(float)(da/50.0),(float)(db/50.0),0.0});
+         Tupla3f nuevas_cart =  Cartesianas(org_polares);
+         punto_atencion = punto_atencion - (nuevas_cart - org_cartesianas);
+         org_cartesianas = nuevas_cart;
 
          actualizarEjesMCV();
+         break ;
 
          break ;
       }
