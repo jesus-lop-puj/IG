@@ -1,3 +1,5 @@
+// Nombre: Jesús, Apellidos: López Pujazón, DNI/pasaporte: 26523483K (DDGG IG curso 20-21)
+
 #ifndef LATAPEONES_H
 #define LATAPEONES_H
 

@@ -23,7 +23,7 @@ Escena::Escena()
    // COMPLETAR: Práctica 4: inicializar 'col_fuentes' y 'material_ini'
    // ...
    col_fuentes = new Col2Fuentes();
-   material_ini = new Material(0.5,0.5,0.5,150);
+   material_ini = new Material(0.5,0.5,0.5,60);
 
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')

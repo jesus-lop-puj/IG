@@ -1,3 +1,5 @@
+// Nombre: Jesús, Apellidos: López Pujazón, DNI/pasaporte: 26523483K (DDGG IG curso 20-21)
+
 #include "malla-ind.h"
 #include "malla-revol.h"
 #include "matrices-tr.h"

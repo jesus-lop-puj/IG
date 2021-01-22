@@ -83,7 +83,7 @@ Cuerpo :: Cuerpo(){
 BrazoDer :: BrazoDer(Matriz4f * &movBrazoDer){
   Textura * textura = new Textura("./imgs/metal.jpg");
 
-  agregar(new Material(textura, 0.9, 0.9, 1, 150));
+  agregar(new Material(textura, 0.9, 0.9, 1, 60));
 
   unsigned ind = agregar(MAT_Rotacion(0.0,1.0,0.0,0.0));
 
@@ -104,7 +104,7 @@ BrazoDer :: BrazoDer(Matriz4f * &movBrazoDer){
 BrazoIzq :: BrazoIzq(Matriz4f * &movBrazoIzq){
   Textura * textura = new Textura("./imgs/metal.jpg");
 
-  agregar(new Material(textura, 0.9, 0.9, 1, 150));
+  agregar(new Material(textura, 0.9, 0.9, 1, 60));
 
   unsigned ind = agregar(MAT_Rotacion(0.0,1.0,0.0,0.0));
 
@@ -190,7 +190,7 @@ Cabeza :: Cabeza(Matriz4f * &rotacionCabeza){
 //-----------------------------------------------------------------------
 // Implementación del constructor de la clase Eva
 Eva::Eva(Matriz4f * &traslacion, Matriz4f * &rotacionCabeza, Matriz4f * &movBrazoIzq, Matriz4f * &movBrazoDer){
-  agregar(new Material(0.9, 0.8, 0.2, 150));
+  agregar(new Material(0.9, 0.8, 0.2, 60));
   unsigned ind = agregar( MAT_Traslacion(0.0, 0.0, 0.0) );
 
   agregar(new Cuerpo());
